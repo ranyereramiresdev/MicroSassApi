@@ -1,5 +1,3 @@
-Comando de criação de bancos de dados:
-
 -- Criar o banco de dados
 CREATE DATABASE MicroSass;
 
