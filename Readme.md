@@ -16,6 +16,7 @@ Baixe o código do repositório para o seu ambiente local.
 Abra o Visual Studio e carregue o projeto.
 
 O Visual Studio automaticamente baixará as dependências do projeto se você estiver conectado à internet.
+
 3. Crie o Banco de Dados
 Utilize o script SQL abaixo para criar as tabelas necessárias no seu banco de dados MySQL:
 
