@@ -14,6 +14,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IResponsibleRepository, ResponsibleRepository>();
 builder.Services.AddScoped<IUserTypeRepository, UserTypeRepository>();
 
+builder.Services.AddSwaggerGen();
+
 builder.Services.AddScoped<MySqlConnection>(_ =>
 {
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -42,6 +44,9 @@ builder.Services.AddAuthentication(configureOptions =>
 var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.MapControllers();
 // Configure the HTTP request pipeline.
