@@ -1,22 +1,21 @@
--- Criar o banco de dados
+O projeto conta com a geração automática de documentação do swagger
+
+
+SCRIPT PARA CRIAÇÃO DE BANCO DE DADOS:
 CREATE DATABASE MicroSass;
 
--- Usar o banco de dados criado
 USE MicroSass;
 
--- Criar a tabela Responsavel
 CREATE TABLE Responsavel (
     Id INT AUTO_INCREMENT PRIMARY KEY,
     Descricao VARCHAR(255) NOT NULL
 );
 
--- Criar a tabela TipoUsuario
 CREATE TABLE TipoUsuario (
     Id INT AUTO_INCREMENT PRIMARY KEY,
     Descricao VARCHAR(255) NOT NULL
 );
 
--- Criar a tabela Usuario
 CREATE TABLE Usuario (
     Id INT AUTO_INCREMENT PRIMARY KEY,
     Email VARCHAR(255) NOT NULL UNIQUE,
