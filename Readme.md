@@ -1,6 +1,3 @@
-
-Entendi! Aqui está o README com o comando SQL em formato de texto simples, sem usar caixas de código:
-
 Projeto ASP.NET API - MicroSass
 Este é um projeto de API em ASP.NET 8, que inclui a geração automática de documentação via Swagger e um script para criação do banco de dados MySQL.
 
