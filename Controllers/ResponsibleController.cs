@@ -16,9 +16,16 @@ namespace MicroSassApi.Controllers
             _responsibleRepository = ResponsibleRepository;
         }
 
+        /// <summary>
+        /// Adicionar um responsável
+        /// </summary>
+        /// <param name="description"></param>
+        /// <returns>Objeto informando o resultado da ação</returns>
         [HttpPost]
         [Route("Add/{description}")]
         [Authorize(Roles = "3")]
+        [ProducesResponseType(typeof(ResulApiDTO), 200)]
+        [ProducesResponseType(typeof(ResulApiDTO), 409)]
 
         public async Task<IActionResult> Add(string description)
         {

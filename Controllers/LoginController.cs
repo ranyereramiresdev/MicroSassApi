@@ -20,8 +20,15 @@ namespace MicroSassApi.Controllers
             _authenticationHelper = AuthenticationHelper;
         }
 
+        /// <summary>
+        /// Gera o token de acesso para consumir as outras rotas
+        /// </summary>
+        /// <param name="body"></param>
+        /// <returns>Retorna o token de acesso</returns>
         [HttpPost]
         [Route("Generate-Token")]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(typeof(ResulApiDTO), 409)]
         public async Task<IActionResult> Login([FromBody] UserLoginDTO body)
         {
             try
@@ -32,12 +39,7 @@ namespace MicroSassApi.Controllers
                 {
                     var token = _authenticationHelper.GenerateToken(result);
 
-                    return Ok(new
-                    {
-                        Tipo = "Bearer",
-                        Token = token,
-                        Duração = "1 hora"
-                    });
+                    return Ok(token);
                 }
                 else
                 {
@@ -62,21 +64,25 @@ namespace MicroSassApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Valida o token de acesso e retornar as claims
+        /// </summary>
+        /// <returns>Retorna uma lista com as 3 principais claims</returns>
         [HttpPost]
         [Route("ValidateToken")]
         [Authorize(Roles = "1,2")]
+        [ProducesResponseType(typeof(Dictionary<string, string>), 200)]
+        [ProducesResponseType(typeof(ResulApiDTO), 409)]
 
         public async Task<IActionResult> ValidateToken()
         {
             try
             {
-                var claims = User.Claims.Select(c => new { c.Type, c.Value }).ToList();
-
-                return Ok(
-                    User.Claims
+                var filteredClaim = User.Claims
                         .Where(c => c.Type == "Id" || c.Type == "IdResponsavel" || c.Type == ClaimTypes.Role)
-                        .ToDictionary(c => c.Type, c => c.Value)
-                );
+                        .ToDictionary(c => c.Type, c => c.Value);
+
+                return Ok(filteredClaim);
             }
             catch (Exception e)
             {

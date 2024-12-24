@@ -14,10 +14,16 @@ namespace MicroSassApi.Controllers
             _userTypeRepository = UserTypeRepository;
         }
 
+        /// <summary>
+        /// Adicionar tipo de usuário
+        /// </summary>
+        /// <param name="description"></param>
+        /// <returns>Objeto informando o resultado da ação</returns>
         [HttpPost]
         [Route("Add/{description}")]
         [Authorize(Roles = "3")]
-
+        [ProducesResponseType(typeof(ResulApiDTO), 200)]
+        [ProducesResponseType(typeof(ResulApiDTO), 409)]
         public async Task<IActionResult> Add(string description)
         {
             ResulApiDTO result = new ResulApiDTO();
