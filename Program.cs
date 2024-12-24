@@ -14,7 +14,24 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IResponsibleRepository, ResponsibleRepository>();
 builder.Services.AddScoped<IUserTypeRepository, UserTypeRepository>();
 
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen( c => {
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "MicroSassApi",
+        Version = "v1",
+        Contact = new Microsoft.OpenApi.Models.OpenApiContact
+        {
+            Name = "Ranyere Ramires",
+            Email = "ranyereramiresdev@gmail.com",
+            Url = new Uri("https://www.linkedin.com/in/ranyere-ramires-076aa1336/")
+        }
+    });
+
+    var xmlFile = "MicroSassApi.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile); 
+    
+    c.IncludeXmlComments(xmlPath);
+});
 
 builder.Services.AddScoped<MySqlConnection>(_ =>
 {
