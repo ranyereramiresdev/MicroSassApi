@@ -9,19 +9,19 @@ namespace MicroSassApi.Controllers
 {
     [Route("Api/[controller]")]
     [ApiController]
-    public class UserController : Controller
+    public class LoginController : Controller
     {
         private readonly IUserRepository _userRepository;
         private readonly IAuthenticationHelper _authenticationHelper;
 
-        public UserController(IUserRepository UserRepositor, IAuthenticationHelper AuthenticationHelper)
+        public LoginController(IUserRepository UserRepositor, IAuthenticationHelper AuthenticationHelper)
         {
             _userRepository = UserRepositor;
             _authenticationHelper = AuthenticationHelper;
         }
 
         [HttpPost]
-        [Route("Login")]
+        [Route("Generate-Token")]
         public async Task<IActionResult> Login([FromBody] UserLoginDTO body)
         {
             try
