@@ -18,7 +18,6 @@ namespace MicroSassApi.Controllers
 
         [HttpPost]
         [Route("Login")]
-
         public async Task<IActionResult> Login([FromBody] UserLoginDTO body)
         {
             try
