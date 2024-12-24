@@ -1,10 +1,11 @@
 ﻿using Dapper;
 using MicroSassApi.Models;
+using MicroSassApi.Repositories.Interfaces;
 using MySql.Data.MySqlClient;
 
 namespace MicroSassApi.Repositories
 {
-    public class ResponsibleRepository
+    public class ResponsibleRepository:IResponsibleRepository
     {
         private MySqlConnection _database;
         public ResponsibleRepository(MySqlConnection database)
