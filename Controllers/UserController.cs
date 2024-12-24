@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MicroSassApi.Controllers
 {
+    [Route("Api/[controller]")]
+    [ApiController]
     public class UserController : Controller
     {
         private IUserRepository _userRepository;
