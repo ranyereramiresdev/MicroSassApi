@@ -15,7 +15,7 @@ namespace MicroSassApi.Controllers
         }
 
         /// <summary>
-        /// Adicinar um usuário
+        /// Adicionar um usuário
         /// </summary>
         /// <param name="usuario"></param>
         /// <returns>Objeto informando o resultado da ação</returns>
