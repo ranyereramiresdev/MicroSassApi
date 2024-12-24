@@ -1,5 +1,6 @@
 ﻿using MicroSassApi.Helpers;
 using MicroSassApi.Helpers.Authentication;
+using MicroSassApi.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MicroSassApi.Controllers
@@ -8,6 +9,13 @@ namespace MicroSassApi.Controllers
     [ApiController]
     public class UserController : Controller
     {
+        private readonly IUserRepository _userRepository;
+
+        public UserController(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
         [HttpPost]
         [Route("Login")]
 
@@ -15,7 +23,22 @@ namespace MicroSassApi.Controllers
         {
             try
             {
-                return Ok(body);
+                var result = await _userRepository.LoginAsync(body.Email, body.Password);
+
+                if (result != null)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    ResulApiDTO resultNotFound = new ResulApiDTO();
+                    resultNotFound.StatusCode = 401;
+                    resultNotFound.Message = "Erro ao logar";
+                    resultNotFound.Error = "Usuário e senha incorretos";
+                    resultNotFound.ErrorDescription = "Usuário e senha incorretos";
+
+                    return StatusCode(resultNotFound.StatusCode, resultNotFound);
+                }
             }
             catch (Exception e)
             {
