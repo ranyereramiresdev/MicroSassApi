@@ -1,7 +1,6 @@
 ﻿using MicroSassApi.Helpers;
 using MicroSassApi.Models;
 using MicroSassApi.Repositories.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MicroSassApi.Controllers
@@ -23,7 +22,6 @@ namespace MicroSassApi.Controllers
         /// <returns>Objeto informando o resultado da ação</returns>
         [HttpPost]
         [Route("Add")]
-        [Authorize(Roles = "3")]
         [ProducesResponseType(typeof(ResulApiDTO), 200)]
         [ProducesResponseType(typeof(ResulApiDTO), 409)]
 

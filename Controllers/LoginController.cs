@@ -2,7 +2,6 @@
 using MicroSassApi.Helpers;
 using MicroSassApi.Helpers.Authentication;
 using MicroSassApi.Repositories.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MicroSassApi.Controllers
@@ -70,7 +69,6 @@ namespace MicroSassApi.Controllers
         /// <returns>Retorna uma lista com as 3 principais claims</returns>
         [HttpPost]
         [Route("ValidateToken")]
-        [Authorize(Roles = "1,2")]
         [ProducesResponseType(typeof(Dictionary<string, string>), 200)]
         [ProducesResponseType(typeof(ResulApiDTO), 409)]
 
