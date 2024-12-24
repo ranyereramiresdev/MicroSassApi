@@ -1,3 +1,6 @@
+
+Entendi! Aqui está o README com o comando SQL em formato de texto simples, sem usar caixas de código:
+
 Projeto ASP.NET API - MicroSass
 Este é um projeto de API em ASP.NET 8, que inclui a geração automática de documentação via Swagger e um script para criação do banco de dados MySQL.
 
@@ -20,45 +23,34 @@ O Visual Studio automaticamente baixará as dependências do projeto se você es
 3. Crie o Banco de Dados
 Utilize o script SQL abaixo para criar as tabelas necessárias no seu banco de dados MySQL:
 
+Crie o banco de dados:
+
 CREATE DATABASE MicroSass;
+
+Em seguida, selecione o banco de dados:
 
 USE MicroSass;
 
-CREATE TABLE Responsavel (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
-    Descricao VARCHAR(255) NOT NULL
-);
+Crie a tabela Responsavel:
 
-CREATE TABLE TipoUsuario (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
-    Descricao VARCHAR(255) NOT NULL
-);
+CREATE TABLE Responsavel ( Id INT AUTO_INCREMENT PRIMARY KEY, Descricao VARCHAR(255) NOT NULL );
 
-CREATE TABLE Usuario (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
-    Email VARCHAR(255) NOT NULL UNIQUE,
-    Senha VARCHAR(255) NOT NULL,
-    IdTipoUsuario INT NOT NULL,
-    IdResponsavel INT NOT NULL,
-    FOREIGN KEY (IdTipoUsuario) REFERENCES TipoUsuario(Id),
-    FOREIGN KEY (IdResponsavel) REFERENCES Responsavel(Id)
-);
+Crie a tabela TipoUsuario:
 
-Conecte-se ao MySQL usando o MySQL Workbench ou qualquer outro cliente MySQL de sua preferência.
-Crie o banco de dados MicroSass.
-Execute o script SQL acima para criar as tabelas necessárias.
+CREATE TABLE TipoUsuario ( Id INT AUTO_INCREMENT PRIMARY KEY, Descricao VARCHAR(255) NOT NULL );
+
+Crie a tabela Usuario:
+
+CREATE TABLE Usuario ( Id INT AUTO_INCREMENT PRIMARY KEY, Email VARCHAR(255) NOT NULL UNIQUE, Senha VARCHAR(255) NOT NULL, IdTipoUsuario INT NOT NULL, IdResponsavel INT NOT NULL, FOREIGN KEY (IdTipoUsuario) REFERENCES TipoUsuario(Id), FOREIGN KEY (IdResponsavel) REFERENCES Responsavel(Id) );
+
+Conecte-se ao MySQL usando o MySQL Workbench ou qualquer outro cliente MySQL de sua preferência. Crie o banco de dados MicroSass. Execute o script SQL acima para criar as tabelas necessárias.
 
 4. Configuração do Banco de Dados no Projeto
-Abra o arquivo appsettings.json no projeto.
-Altere a string de conexão do banco de dados para refletir o seu ambiente MySQL. Exemplo:
+Abra o arquivo appsettings.json no projeto. Altere a string de conexão do banco de dados para refletir o seu ambiente MySQL.
 
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Database=MicroSass;User=root;Password=SuaSenhaAqui;"
-  }
-}
+Exemplo:
 
-6. Rodando o Projeto
-No Visual Studio, selecione o projeto como o Start Project (Projeção inicial).
-Clique em Run ou pressione Ctrl + F5 para iniciar a API.
-A API estará rodando e você poderá acessar os endpoints via Swagger ou qualquer cliente HTTP (como Postman).
+{ "ConnectionStrings": { "DefaultConnection": "Server=localhost;Database=MicroSass;User=root;Password=SuaSenhaAqui;" } }
+
+5. Rodando o Projeto
+No Visual Studio, selecione o projeto como o Start Project (Projeto inicial). Clique em Run ou pressione Ctrl + F5 para iniciar a API. A API estará rodando e você poderá acessar os endpoints via Swagger ou qualquer cliente HTTP (como Postman).
