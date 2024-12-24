@@ -2,6 +2,7 @@ O projeto conta com a geração automática de documentação do swagger
 
 
 SCRIPT PARA CRIAÇÃO DE BANCO DE DADOS:
+
 CREATE DATABASE MicroSass;
 
 USE MicroSass;
