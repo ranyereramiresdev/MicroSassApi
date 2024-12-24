@@ -5,5 +5,6 @@ namespace MicroSassApi.Repositories.Interfaces
     public interface IUserRepository
     {
         Task<UsuarioModel?> LoginAsync(string email, string senha);
+        Task Add(UsuarioModel usuario);
     }
 }

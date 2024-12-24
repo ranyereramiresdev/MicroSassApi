@@ -42,5 +42,32 @@ namespace MicroSassApi.Repositories
                 throw;
             }
         }
+
+        public async Task Add(UsuarioModel usuario)
+        {
+            try
+            {
+                const string query = @"
+                insert into Usuario
+                (Email, Senha, IdTipoUsuario, IdResponsavel)
+                values
+                (@Email, @Senha, @IdTipoUsuario, @IdResponsavel)";
+
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("@Email", usuario.Email);
+                dynamicParameters.Add("@Senha", usuario.Senha);
+                dynamicParameters.Add("@IdTipoUsuario", usuario.IdTipoUsuario);
+                dynamicParameters.Add("@IdResponsavel", usuario.IdResponsavel);
+
+                await _database.ExecuteAsync(query, dynamicParameters);
+
+                _database.Close();
+            }
+            catch
+            {
+                _database.Close();
+                throw;
+            }
+        }
     }
 }
