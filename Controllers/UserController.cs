@@ -1,6 +1,8 @@
-﻿using MicroSassApi.Helpers;
+﻿using System.Security.Claims;
+using MicroSassApi.Helpers;
 using MicroSassApi.Helpers.Authentication;
 using MicroSassApi.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MicroSassApi.Controllers
@@ -10,10 +12,12 @@ namespace MicroSassApi.Controllers
     public class UserController : Controller
     {
         private readonly IUserRepository _userRepository;
+        private readonly IAuthenticationHelper _authenticationHelper;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserRepository UserRepositor, IAuthenticationHelper AuthenticationHelper)
         {
-            _userRepository = userRepository;
+            _userRepository = UserRepositor;
+            _authenticationHelper = AuthenticationHelper;
         }
 
         [HttpPost]
@@ -26,7 +30,14 @@ namespace MicroSassApi.Controllers
 
                 if (result != null)
                 {
-                    return Ok(result);
+                    var token = _authenticationHelper.GenerateToken(result);
+
+                    return Ok(new
+                    {
+                        Tipo = "Bearer",
+                        Token = token,
+                        Duração = "1 hora"
+                    });
                 }
                 else
                 {
@@ -38,6 +49,34 @@ namespace MicroSassApi.Controllers
 
                     return StatusCode(resultNotFound.StatusCode, resultNotFound);
                 }
+            }
+            catch (Exception e)
+            {
+                ResulApiDTO result = new ResulApiDTO();
+                result.StatusCode = 409;
+                result.Message = "Houve um erro interno relacionado a Api";
+                result.Error = e.Message;
+                result.ErrorDescription = e.Message;
+
+                return StatusCode(result.StatusCode, result);
+            }
+        }
+
+        [HttpPost]
+        [Route("ValidateToken")]
+        [Authorize(Roles = "1,2")]
+
+        public async Task<IActionResult> ValidateToken()
+        {
+            try
+            {
+                var claims = User.Claims.Select(c => new { c.Type, c.Value }).ToList();
+
+                return Ok(
+                    User.Claims
+                        .Where(c => c.Type == "Id" || c.Type == "IdResponsavel" || c.Type == ClaimTypes.Role)
+                        .ToDictionary(c => c.Type, c => c.Value)
+                );
             }
             catch (Exception e)
             {
