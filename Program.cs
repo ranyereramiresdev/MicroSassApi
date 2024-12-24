@@ -12,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IResponsibleRepository, ResponsibleRepository>();
+builder.Services.AddScoped<IUserTypeRepository, UserTypeRepository>();
 
 builder.Services.AddScoped<MySqlConnection>(_ =>
 {

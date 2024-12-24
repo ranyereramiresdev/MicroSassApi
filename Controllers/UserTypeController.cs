@@ -6,14 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MicroSassApi.Controllers
 {
-    [Route("Api/[controller]")]
-    [ApiController]
-    public class ResponsibleController : Controller
+    public class UserTypeController : Controller
     {
-        private readonly IResponsibleRepository _responsibleRepository;
-        public ResponsibleController(IResponsibleRepository ResponsibleRepository)
+        private IUserTypeRepository _userTypeRepository;
+        public UserTypeController(IUserTypeRepository UserTypeRepository)
         {
-            _responsibleRepository = ResponsibleRepository;
+            _userTypeRepository = UserTypeRepository;
         }
 
         [HttpPost]
@@ -25,14 +23,14 @@ namespace MicroSassApi.Controllers
             ResulApiDTO result = new ResulApiDTO();
             try
             {
-                ResponsavelModel reponsible = new ResponsavelModel();
-                reponsible.Id = 0;
-                reponsible.Descricao = description;
+                TipoUsuarioModel tipoUsuario = new TipoUsuarioModel();
+                tipoUsuario.Id = 0;
+                tipoUsuario.Descricao = description;
 
-                await _responsibleRepository.Add(reponsible);
+                await _userTypeRepository.Add(tipoUsuario);
 
                 result.StatusCode = 201;
-                result.Message = "Reponsável adicionado com sucesso";
+                result.Message = "Tipo de usuário adicionado com sucesso";
                 result.Error = null;
                 result.ErrorDescription = null;
 
