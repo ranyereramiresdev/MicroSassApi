@@ -14,7 +14,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IResponsibleRepository, ResponsibleRepository>();
 builder.Services.AddScoped<IUserTypeRepository, UserTypeRepository>();
 
-builder.Services.AddSwaggerGen( c => {
+builder.Services.AddSwaggerGen(c =>
+{
     c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
     {
         Title = "MicroSassApi",
@@ -28,8 +29,8 @@ builder.Services.AddSwaggerGen( c => {
     });
 
     var xmlFile = "MicroSassApi.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile); 
-    
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
     c.IncludeXmlComments(xmlPath);
 });
 
@@ -53,7 +54,7 @@ builder.Services.AddAuthentication(configureOptions =>
     {
         ValidateIssuerSigningKey = false,
         IssuerSigningKey = new SymmetricSecurityKey(key),
-        ValidateIssuer = false, 
+        ValidateIssuer = false,
         ValidateAudience = false,
     };
 });

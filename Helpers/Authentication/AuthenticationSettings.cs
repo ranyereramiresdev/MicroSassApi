@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Infrastructure;
-
-namespace MicroSassApi.Helpers.Authentication
+﻿namespace MicroSassApi.Helpers.Authentication
 {
     public class AuthenticationSettings
     {

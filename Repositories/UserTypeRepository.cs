@@ -5,7 +5,7 @@ using MySql.Data.MySqlClient;
 
 namespace MicroSassApi.Repositories
 {
-    public class UserTypeRepository:IUserTypeRepository
+    public class UserTypeRepository : IUserTypeRepository
     {
         private MySqlConnection _database;
         public UserTypeRepository(MySqlConnection database)

@@ -9,7 +9,7 @@ namespace MicroSassApi.Helpers.Authentication
 {
     public class AuthenticationHelper : IAuthenticationHelper
     {
-        public string GenerateToken (UsuarioModel user)
+        public string GenerateToken(UsuarioModel user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(AuthenticationSettings.Secret);

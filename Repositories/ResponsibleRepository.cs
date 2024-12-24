@@ -5,7 +5,7 @@ using MySql.Data.MySqlClient;
 
 namespace MicroSassApi.Repositories
 {
-    public class ResponsibleRepository:IResponsibleRepository
+    public class ResponsibleRepository : IResponsibleRepository
     {
         private MySqlConnection _database;
         public ResponsibleRepository(MySqlConnection database)
@@ -25,7 +25,7 @@ namespace MicroSassApi.Repositories
                 INSERT INTO Responsavel (Descricao)
                 VALUES (@Descricao);";
 
-                await _database.ExecuteAsync(query, new { Descricao = reponsible.Descricao});
+                await _database.ExecuteAsync(query, new { Descricao = reponsible.Descricao });
 
                 _database.Close();
             }

@@ -1,7 +1,6 @@
 ﻿using MicroSassApi.Helpers;
 using MicroSassApi.Models;
 using MicroSassApi.Repositories.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MicroSassApi.Controllers
