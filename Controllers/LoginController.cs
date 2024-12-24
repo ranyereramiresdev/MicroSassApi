@@ -29,7 +29,7 @@ namespace MicroSassApi.Controllers
         [Route("Generate-Token")]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(ResulApiDTO), 409)]
-        public async Task<IActionResult> Login([FromBody] UserLoginDTO body)
+        public async Task<IActionResult> GenerateToken([FromBody] UserLoginDTO body)
         {
             try
             {

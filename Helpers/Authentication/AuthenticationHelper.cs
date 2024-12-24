@@ -1,5 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using MicroSassApi.Models;
 using Microsoft.IdentityModel.Tokens;
@@ -26,6 +27,24 @@ namespace MicroSassApi.Helpers.Authentication
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public string EncryptWithMd5(string input)
+        {
+            using (MD5 md5 = MD5.Create())
+            {
+                // Convertendo o texto para um array de bytes
+                byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+                // Calculando o hash MD5
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
+                // Convertendo os bytes de volta para string hexadecimal
+                StringBuilder sb = new StringBuilder();
+                foreach (byte b in hashBytes)
+                {
+                    sb.Append(b.ToString("x2"));
+                }
+                return sb.ToString();
+            }
         }
     }
 }
